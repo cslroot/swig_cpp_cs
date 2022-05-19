@@ -10,6 +10,14 @@
 
 %include "windows.i"
 
+
+%typemap(csimports) cs::foo::Foo
+%{
+using CS.Common;
+%}
+%import "../../common/bindings/common_cs.i"
+
+
 // Add necessary symbols to generated header
 %{
 #include "foo_export.h"

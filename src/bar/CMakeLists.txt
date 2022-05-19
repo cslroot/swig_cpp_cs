@@ -12,8 +12,7 @@ target_sources(${PROJ_NAME} PRIVATE ${${PROJ_NAME}_SRC})
 
 target_compile_features(${PROJ_NAME} PRIVATE cxx_std_17)
 target_include_directories(${PROJ_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-target_link_libraries(${PROJ_NAME} PUBLIC foo)
+target_link_libraries(${PROJ_NAME} PUBLIC common)
 
 #----- Generate bindings -----
 # ----- build wrapper for C# and generate .cs files -----
@@ -42,7 +41,7 @@ execute_process(
     -includeall
     -I${CMAKE_CURRENT_BINARY_DIR}
     -I${CMAKE_CURRENT_SOURCE_DIR}/include
-    -I${CMAKE_CURRENT_SOURCE_DIR}/../foo/include
+    -I${CMAKE_CURRENT_SOURCE_DIR}/../common/include
     -outdir ${CS_SWIG_EXPORT_CS_DIR}
     # C# specific options
     -dllimport bar.dll  # .cs code using DllImport(xxxx) as this name
@@ -74,8 +73,8 @@ set_property(TARGET ${PROJ_NAME_CS} PROPERTY VS_DOTNET_REFERENCES
 	"System"
 	"System.Core"
 	"System.Data"
-	"WindowsBase")
+	"WindowsBase"
+)
 
-target_link_libraries(${PROJ_NAME_CS} PRIVATE foo_cs)
-
+target_link_libraries(${PROJ_NAME_CS} PRIVATE common_cs)
 endif()

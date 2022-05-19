@@ -10,11 +10,12 @@
 
 %include "windows.i"
 
+
 %typemap(csimports) cs::bar::Bar
 %{
-using CS.Foo;
+using CS.Common;
 %}
-%import "../../foo/bindings/foo_cs.i"
+%import "../../common/bindings/common_cs.i"
 
 // Add necessary symbols to generated header
 %{

@@ -1,3 +1,5 @@
 build/
 *wrap.cpp
-bindings/cs/*.cs
+
+**/bindings/cs/*.cs
+.vscode/

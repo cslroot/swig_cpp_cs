@@ -2,7 +2,6 @@ enable_language(CSharp)
 include(CSharpUtilities)
 set(PROJ_NAME_CS app_cs)
 file(GLOB_RECURSE ${PROJ_NAME_CS}_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cs)
-message(STATUS --------------PROJ_NAME_CS_SRC  ${${PROJ_NAME_CS}_SRC})
 add_executable(${PROJ_NAME_CS} ${CS_LIB_TYPE})
 target_compile_options(${PROJ_NAME_CS} PRIVATE "/langversion:latest")
 # set_property(TARGET ${PROJ_NAME_CS} PROPERTY VS_DOTNET_TARGET_FRAMEWORK_VERSION "net6.0")
@@ -20,5 +19,6 @@ set_property(TARGET ${PROJ_NAME_CS} PROPERTY VS_DOTNET_REFERENCES
 	"System.Data"
 	"WindowsBase")
 
+target_link_libraries(${PROJ_NAME_CS} PRIVATE common_cs)
 target_link_libraries(${PROJ_NAME_CS} PRIVATE foo_cs)
 target_link_libraries(${PROJ_NAME_CS} PRIVATE bar_cs)

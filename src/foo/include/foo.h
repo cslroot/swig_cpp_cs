@@ -1,6 +1,7 @@
 #pragma once
 
 #include <foo_export.h>
+#include <common.h>
 
 #ifndef SWIG
 #include <string>
@@ -10,15 +11,7 @@ namespace cs
 {
   namespace foo
   {
-    class FOO_EXPORT FooBarBase
-    {
-    public:
-      virtual std::string GetName() const = 0;
-
-    private:
-    };
-
-    class FOO_EXPORT Foo : public FooBarBase
+    class FOO_EXPORT Foo : public cs::common::FooBarBase
     {
     public:
       std::string GetName() const;

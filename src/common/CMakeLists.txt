@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16.0)
 
-set(PROJ_NAME foo)
+set(PROJ_NAME common)
 
 add_library(${PROJ_NAME})
 
@@ -12,7 +12,7 @@ target_sources(${PROJ_NAME} PRIVATE ${${PROJ_NAME}_SRC})
 
 target_compile_features(${PROJ_NAME} PRIVATE cxx_std_17)
 target_include_directories(${PROJ_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries(${PROJ_NAME} PUBLIC common)
+
 
 #----- Generate bindings -----
 # ----- build wrapper for C# and generate .cs files -----
@@ -28,7 +28,7 @@ cmake_policy(SET CMP0122 NEW) # UseSWIG use standard library name conventions fo
 include(UseSWIG)
 set(UseSWIG_MODULE_VERSION 2)
 
-set(CS_SWIG_INTERFACE_FILE ${CMAKE_CURRENT_SOURCE_DIR}/bindings/foo_cs.i)
+set(CS_SWIG_INTERFACE_FILE ${CMAKE_CURRENT_SOURCE_DIR}/bindings/common_cs.i)
 set(CS_SWIG_EXPORT_CS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/cs)
 
 file(MAKE_DIRECTORY ${CS_SWIG_EXPORT_CS_DIR})
@@ -36,16 +36,15 @@ file(MAKE_DIRECTORY ${CS_SWIG_EXPORT_CS_DIR})
 execute_process(
   COMMAND ${SWIG_EXECUTABLE}
     -c++ -csharp
-    -module cs_foo  # module name
+    -module cs_common  # module name
     -cppext cpp     # file extension 
     -includeall
     -I${CMAKE_CURRENT_BINARY_DIR}
     -I${CMAKE_CURRENT_SOURCE_DIR}/include
-    -I${CMAKE_CURRENT_SOURCE_DIR}/../common/include
     -outdir ${CS_SWIG_EXPORT_CS_DIR}
     # C# specific options
-    -dllimport foo.dll  # .cs code using DllImport(xxxx) as this name
-    -namespace CS.Foo   # Generate wrappers into C# namespace <nm>
+    -dllimport common.dll  # .cs code using DllImport(xxxx) as this name
+    -namespace CS.Common   # Generate wrappers into C# namespace <nm>
     # -noproxy          # Generate the low-level functional interface instead of proxy classes
     # -oldvarnames	    # Old intermediary method names for variable wrappers
     # -outfile ${CMAKE_CURRENT_BINARY_DIR}/bindings/cs  # Write all C# into a single <file> located in the output directory
@@ -56,7 +55,7 @@ execute_process(
 
 
 enable_language(CSharp)
-set(PROJ_NAME_CS foo_cs)
+set(PROJ_NAME_CS common_cs)
 file(GLOB_RECURSE ${PROJ_NAME_CS}_SRC CONFIGURE_DEPENDS ${CS_SWIG_EXPORT_CS_DIR}/*.cs)
 
 add_library(${PROJ_NAME_CS} ${CS_LIB_TYPE})
@@ -76,5 +75,4 @@ set_property(TARGET ${PROJ_NAME_CS} PROPERTY VS_DOTNET_REFERENCES
 	"WindowsBase"
 )
 
-target_link_libraries(${PROJ_NAME_CS} PRIVATE common_cs)
 endif()

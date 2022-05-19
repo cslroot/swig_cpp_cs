@@ -2,17 +2,16 @@
 
 example code in order to generate c# from c++ via swig.
 
-
+* common
+  * shared lib contains the base class of Foo and Bar
 * foo
-  * C++ library using a class in bar as base class
+  * shared lib using common
 * bar
-  * C++ library
-* myConsoleApp
-  * deps. myClassLib -> myClassLibBase
-* myWinFormsApp
-  * Windows forms application
-* myWPFApp
-  * WPF application
+  * shared lib using common
+* app_cpp
+  * C++ executable using foo, bar and common
+* app_cs
+  * C# executable using foo(C#), bar(C#), common(C#)
 
 ## limitations
 
