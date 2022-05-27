@@ -38,7 +38,7 @@ execute_process(
     -c++ -csharp
     -module cs_foo  # module name
     -cppext cpp     # file extension 
-    -includeall
+    # -includeall
     -I${CMAKE_CURRENT_BINARY_DIR}
     -I${CMAKE_CURRENT_SOURCE_DIR}/include
     -I${CMAKE_CURRENT_SOURCE_DIR}/../common/include

@@ -3,9 +3,7 @@
 #include <common.h>
 #include <bar_export.h>
 
-#ifndef SWIG
 #include <string>
-#endif
 
 namespace cs
 {

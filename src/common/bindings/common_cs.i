@@ -22,3 +22,4 @@ SWIG_CSBODY_TYPEWRAPPER(public, public, public, SWIGTYPE)
 // Process symbols in header
 %include "common_export.h" 
 %include "common.h"
+%include "foobarbase.h"

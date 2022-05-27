@@ -38,7 +38,7 @@ execute_process(
     -c++ -csharp
     -module cs_common  # module name
     -cppext cpp     # file extension 
-    -includeall
+    # -includeall
     -I${CMAKE_CURRENT_BINARY_DIR}
     -I${CMAKE_CURRENT_SOURCE_DIR}/include
     -outdir ${CS_SWIG_EXPORT_CS_DIR}

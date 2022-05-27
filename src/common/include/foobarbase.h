@@ -2,9 +2,7 @@
 
 #include <common_export.h>
 
-#ifndef SWIG
 #include <string>
-#endif
 
 namespace cs
 {
